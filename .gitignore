@@ -5,3 +5,5 @@ myenv
 setup.py
 htlib
 htlib.egg-info
+.pypirc
+setup.cfg
