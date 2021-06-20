@@ -7,3 +7,4 @@ htlib
 htlib.egg-info
 .pypirc
 setup.cfg
+dist
