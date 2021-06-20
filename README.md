@@ -1,4 +1,4 @@
-libserial
+HTSERIAL
     
     Este módulo facilita algunas tareas con pyserial
 
