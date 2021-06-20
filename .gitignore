@@ -3,3 +3,5 @@ arduino
 circuito
 myenv
 setup.py
+htlib
+htlib.egg-info

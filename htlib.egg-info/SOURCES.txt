@@ -1,9 +1,0 @@
-README.md
-setup.py
-htlib/__init__.py
-htlib/lib.py
-htlib.egg-info/PKG-INFO
-htlib.egg-info/SOURCES.txt
-htlib.egg-info/dependency_links.txt
-htlib.egg-info/requires.txt
-htlib.egg-info/top_level.txt
