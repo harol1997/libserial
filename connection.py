@@ -76,30 +76,27 @@ class Ubidot_Client:
 
         self.HEADERS = {'X-Auth-Token':token}
 
-    def send_value(self,**data):
-        """Send value to Ubidot
-
-        Args:
-            label_variable ([str]): name of variable label
-            data ([dict]): data to send,example {label_variable:value,label_variable2:value2,...}
-
-        Returns:
-            [tuple]: if there's an error state_send is False and a error message as description of the error.\n
-                     if there's not an error state_send is True and error message is empty
+    def __send_value(self, data, variable_label):
+        """this method is executing in thread
         """
-        
-        state_send = True
-        mssg_error = ""
-        link = f"https://things.ubidots.com/api/v1.6/devices/{self.label_device}"
+        link = f"https://things.ubidots.com/api/v1.6/devices/{self.label_device}/{variable_label}/values"
         try:
 
             self.r = post(link,headers=self.HEADERS,json=data)
+            print("[OK]: DATA HAS BEEN SENDED SUCCESFUL")
+        except Exception as e: 
+            print(f"[ERROR]: {str(e)}")
 
-        except Exception as e:
-            state_send = False 
-            mssg_error = f"[ERROR]: {str(e)}"
-
-        return state_send,mssg_error
+    def send_value(self, variable_label, inthread=False,  **data):
+        """Send value to Ubidot
+        Args:
+            data ([keywords]): data to send,example label_variable=value,label_variable2=value2,...
+        """
+        
+        if inthread:
+            Thread(target=self.__send_value, args=(data, variable_label)).start()
+        else:
+            self.__send_value(data, variable_label)
 
     def close(self):
         self.r.close()
